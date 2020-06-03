@@ -67,7 +67,7 @@ gitalk:
   clientSecret: 235bf70b9b10b93b8af446c949e722ec475c9397    #生成的clientSecret
   repo: clairechen.github.io    #仓库名称
   owner: CzyerChen    #github用户名
-  admin: clairechen
+  admin: CzyerChen
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
