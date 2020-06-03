@@ -1,28 +1,29 @@
 # Site settings
-title: BY Blog
-SEOTitle: 柏荧的博客 | BY Blog
-header-img: img/post-bg-desk.jpg
-email: qiubaiying@gmail.com
-description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, 柏荧的博客, qiubaiying, 邱柏荧, iOS, Apple, iPhone"
-url: "http://qiubaiying.github.io"          # your host, for absolute URL
+title: Claire's Blog
+SEOTitle: 也无言的博客 | Claire's Blog
+header-img: img/post-bg-keyboard.jpg
+email: clairelove.chen@gmail.com
+description: "Keep going on and to be a Javer."
+keyword: "Claire, Claire Chen, 也无言, JAVA, Software Engineer"
+url: "https://zy5205.cn/"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/qiubaiying/qiubaiying.github.io.git" # you code repository
+github_repo: "https://github.com/CzyerChen/clairechen.github.io" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "To do everything you want if possible"
+sidebar-avatar: /img/post-author.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
 # SNS settings
 RSS: false
 # weibo_username:     qiubaiying
-zhihu_username:     qiubaiying
-github_username:    qiubaiying
-facebook_username:  baiying.qiu.7
-jianshu_username:   e71990ada2fd
+zhihu_username:     Czyer
+github_username:    CzyerChen
+#facebook_username:  
+csdn_username:      c_zyer
+jianshu_username:   c1bc5973dbce
 #twitter_username:   qiubaiying
 
 
@@ -62,11 +63,11 @@ kramdown:
 # Gitalk
 gitalk:
   enable: true    #是否开启Gitalk评论
-  clientID: f2c84e7629bb1446c1a4                            #生成的clientID
-  clientSecret: ca6d6139d1e1b8c43f8b2e19492ddcac8b322d0d    #生成的clientSecret
-  repo: qiubaiying.github.io    #仓库名称
-  owner: qiubaiying    #github用户名
-  admin: qiubaiying
+  clientID: c9cf2340b2a85d2baf51                            #生成的clientID
+  clientSecret: 235bf70b9b10b93b8af446c949e722ec475c9397    #生成的clientSecret
+  repo: clairechen.github.io    #仓库名称
+  owner: CzyerChen    #github用户名
+  admin: clairechen
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
@@ -97,20 +98,20 @@ service-worker: true
 
 
 # Friends
-friends: [
-    {
-        title: "WY",
-        href: "http://zhengwuyang.com"
-    },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
-    },{
-        title: "Apple",
-        href: "https://apple.com"
-    },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
-    }
-]
+# friends: [
+#     {
+#         title: "WY",
+#         href: "http://zhengwuyang.com"
+#     },{
+#         title: "简书·BY",
+#         href: "http://www.jianshu.com/u/e71990ada2fd"
+#     },{
+#         title: "Apple",
+#         href: "https://apple.com"
+#     },{
+#         title: "Apple Developer",
+#         href: "https://developer.apple.com/"
+#     }
+# ]
 
 theme: jekyll-theme-cayman
