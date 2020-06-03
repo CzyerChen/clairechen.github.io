@@ -3,9 +3,9 @@
   "short_name": "Claire's Blog",
   "description": "Software Engineer",
   "icons": [{
-    "src": "icons/pwa_icon_75.jpeg",
+    "src": "icons/pwa_icon_75.png",
     "sizes": "75x75",
-    "type": "image/jpeg"
+    "type": "image/png"
   }],
   "background_color": "#fff",
   "theme_color": "#000",
