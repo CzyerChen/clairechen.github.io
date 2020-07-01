@@ -2,7 +2,7 @@
 layout:     post
 title:      Mybatis基础支持层-Binding模块
 subtitle:   Binding/代理/工厂
-date:       2020-06-22
+date:       2020-06-30
 author:     Claire
 header-img: img/post-bg-universe.jpg
 catalog: true
