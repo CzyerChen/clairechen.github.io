@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Mybatis核心处理层-ResultHandler参数映射核心逻辑-3
+title:      Mybatis核心处理层-ResultHandler参数映射核心逻辑-4
 subtitle:   结果集映射/延迟加载/动态代理
 date:       2020-07-16
 author:     Claire
