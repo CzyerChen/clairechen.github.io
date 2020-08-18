@@ -211,3 +211,201 @@ tags:
 - 以上发现flushCache 参数，LocalCacheScope配置 都可以影响是否删除缓存，除此以外，在insert update delete 对应的doUpdate之前都需要清除缓存
 
 ### （2）事务操作
+
+- commit & rollback
+
+```java
+
+  @Override
+  public void commit(boolean required) throws SQLException {
+    if (closed) {
+      //连接关闭了
+      throw new ExecutorException("Cannot commit, transaction is already closed");
+    }
+    //清除一级缓存
+    clearLocalCache();
+    //批处理多条SQL，不回滚
+    flushStatements();
+    if (required) {
+      //如果需要提交，则提交
+      transaction.commit();
+    }
+  }
+
+  @Override
+  public void rollback(boolean required) throws SQLException {
+    if (!closed) {
+      //连接未关闭
+      try {
+        //清除一级缓存
+        clearLocalCache();
+        //批处理SQL，需要混滚
+        flushStatements(true);
+      } finally {
+        if (required) {
+          //如果需要回滚
+          transaction.rollback();
+        }
+      }
+    }
+  }
+```
+
+## 3. SimpleExecutor
+
+- 主要实现4个方法：doQuery doQueryCursor doFlushStatements doUpdate
+- 都是依靠Configuration  获取Connection 获取PrepareStatement  生成StatementHandler 最终依靠handler来实现以上4个方法
+
+```java
+ @Override
+  public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+    Statement stmt = null;
+    try {
+      Configuration configuration = ms.getConfiguration();
+      StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
+      stmt = prepareStatement(handler, ms.getStatementLog());
+      return handler.query(stmt, resultHandler);
+    } finally {
+      closeStatement(stmt);
+    }
+  }
+```
+
+## 4.ReuseExecutor
+
+- private final Map<String, Statement> statementMap = new HashMap<>();
+- 依靠Map实现Statement的重用
+- 方法的实现与SimpleExecutor相同
+- prepareStatement阶段，会判断缓存是否有建立的相同模式下的SQL语句对应的Statement对象，实现重用
+- 会在doFlushStatement的时候，将Map清空
+
+```java
+  @Override
+  public List<BatchResult> doFlushStatements(boolean isRollback) {
+    for (Statement stmt : statementMap.values()) {
+      closeStatement(stmt);
+    }
+    statementMap.clear();
+    return Collections.emptyList();
+  }
+
+```
+
+## 5.BatchExecutor
+
+- 对于频繁单条SQL发往数据库，使得数据库负载过高的情况，客户端通常会将批量的SQL积累后，在适当的时机，发往数据库同时执行（有上限），以减轻数据库与网络的压力
+
+- JDBC中批处理仅支持insert\update\delete 不支持select
+- 因而核心代码都聚集在doUpdate的方法中
+
+```java
+  @Override
+  public int doUpdate(MappedStatement ms, Object parameterObject) throws SQLException {
+    final Configuration configuration = ms.getConfiguration();
+    final StatementHandler handler = configuration.newStatementHandler(this, ms, parameterObject, RowBounds.DEFAULT, null, null);
+    final BoundSql boundSql = handler.getBoundSql();
+    final String sql = boundSql.getSql();
+    final Statement stmt;
+    if (sql.equals(currentSql) && ms.equals(currentStatement)) {
+      //SQL与最近一次的查询情况相同，直接添加到同一个对象中进行等待
+      int last = statementList.size() - 1;
+      stmt = statementList.get(last);
+      applyTransactionTimeout(stmt);
+      handler.parameterize(stmt);// fix Issues 322 处理?占位符
+      BatchResult batchResult = batchResultList.get(last);
+      batchResult.addParameterObject(parameterObject);
+    } else {
+      //如果不相同，则打开一个新的连接，创建新的Statement,并添加到集合中进行等待
+      Connection connection = getConnection(ms.getStatementLog());
+      stmt = handler.prepare(connection, transaction.getTimeout());
+      handler.parameterize(stmt);    // fix Issues 322  处理?占位符
+      currentSql = sql;
+      currentStatement = ms;
+      statementList.add(stmt);
+      batchResultList.add(new BatchResult(ms, sql, parameterObject));
+    }
+    handler.batch(stmt);
+    return BATCH_UPDATE_RETURN_VALUE;
+  }
+```
+
+- 执行批处理的关键方法：doFlushStatements
+
+```java
+@Override
+  public List<BatchResult> doFlushStatements(boolean isRollback) throws SQLException {
+    try {
+      List<BatchResult> results = new ArrayList<>();
+      if (isRollback) {
+        //需要回滚
+        return Collections.emptyList();
+      }
+      for (int i = 0, n = statementList.size(); i < n; i++) {
+        //依次取出每一个需要执行的Statement
+        Statement stmt = statementList.get(i);
+        applyTransactionTimeout(stmt);
+        BatchResult batchResult = batchResultList.get(i);
+        try {
+          //stmt.executeBatch()核心批处理方法
+          //updateCount 是拿stmt.executeBatch() 返回值--影响的行数，进行设置
+          batchResult.setUpdateCounts(stmt.executeBatch());
+          MappedStatement ms = batchResult.getMappedStatement();
+          List<Object> parameterObjects = batchResult.getParameterObjects();
+          //处理主键
+          KeyGenerator keyGenerator = ms.getKeyGenerator();
+          if (Jdbc3KeyGenerator.class.equals(keyGenerator.getClass())) {
+            Jdbc3KeyGenerator jdbc3KeyGenerator = (Jdbc3KeyGenerator) keyGenerator;
+            jdbc3KeyGenerator.processBatch(ms, stmt, parameterObjects);
+          } else if (!NoKeyGenerator.class.equals(keyGenerator.getClass())) { //issue #141
+            for (Object parameter : parameterObjects) {
+              keyGenerator.processAfter(this, ms, stmt, parameter);
+            }
+          }
+          // Close statement to close cursor #1109
+          closeStatement(stmt);
+        } catch (BatchUpdateException e) {
+          StringBuilder message = new StringBuilder();
+          message.append(batchResult.getMappedStatement().getId())
+              .append(" (batch index #")
+              .append(i + 1)
+              .append(")")
+              .append(" failed.");
+          if (i > 0) {
+            message.append(" ")
+                .append(i)
+                .append(" prior sub executor(s) completed successfully, but will be rolled back.");
+          }
+          throw new BatchExecutorException(message.toString(), e, results, batchResult);
+        }
+        results.add(batchResult);
+      }
+      return results;
+    } finally {
+      for (Statement stmt : statementList) {
+        closeStatement(stmt);
+      }
+      currentSql = null;
+      statementList.clear();
+      batchResultList.clear();
+    }
+  }
+```
+
+## 6. CachingExecutor
+
+- 不同于上面的模板方法，CachingExecutor是采用了装饰的方法，为mybatis提供二级缓存
+
+### 什么是二级缓存？
+
+1. mybatis-config中 cahceEnabled是开始二级缓存的总开关
+
+- 为true时生效，默认为true
+
+2. 配置cache / cacheRef 节点就表明开启二级缓存
+
+- 默认实现是PerpetualCache
+- 通过cache / cacheRef的配置，用户可以实现在命名空间粒度上管理二级缓存
+
+3.<select>节点中 配置useCache属性
+
+- 标识该操作的结果是否需要保存到二级缓存中
