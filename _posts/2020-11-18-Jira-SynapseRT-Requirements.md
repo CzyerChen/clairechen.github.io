@@ -37,7 +37,7 @@ tags:
 - 在JIRA中创建需求；
 - 直接从需求中创建测试用例以保证需求被测试所覆盖，或者您可以链接已有的测试用例到需求；
 
-![avatar](./img/Jira-SynapseRT-flow.jpg)
+![avatar](../img/Jira-SynapseRT-flow.jpg)
 
 ## 二、相关责任人说明
 

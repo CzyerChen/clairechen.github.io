@@ -46,7 +46,7 @@ tags:
 - 测试者开始测试执行，发现缺陷时直接从测试执行中创建或者链接缺陷；
 - 通过不同的测试报告查看测试结果。
 
-![avatar](./img/Jira-SynapseRT-flow.jpg)
+![avatar](../img/Jira-SynapseRT-flow.jpg)
 
 ## 二、相关责任人说明
 

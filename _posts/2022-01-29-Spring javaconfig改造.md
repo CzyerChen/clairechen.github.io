@@ -2,7 +2,7 @@
 layout:     post
 title:      Spring javaconfig化改造
 subtitle:   去xml、注解化
-date:       2021-07-30
+date:       2022-01-29
 author:     Claire
 header-img: img/post-bg-github-cup.jpg
 catalog: true

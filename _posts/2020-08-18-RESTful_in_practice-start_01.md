@@ -16,7 +16,7 @@ tags:
 
 REST发展进程
 
-![avatar](./img/REST历史.png)
+![avatar](../img/REST历史.png)
 
 ## 一、互联网应用架构约束
 
