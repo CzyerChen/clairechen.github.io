@@ -9,11 +9,11 @@ catalog: true
 tags:
     - Java
     - Mybatis
-    - 装饰器
+    - 装饰器模式
     - 模板方法
 ---
 
-# Mybatis核心处理层-Executor
+## Mybatis核心处理层-Executor
 
 - 前面介绍了一些StatementHandler,用于最终执行query/insert/update/delete/batch/queryCursor操作
 - 本篇介绍它的上层Executor
@@ -31,20 +31,20 @@ tags:
   BatchExecutor  
 ```
 
-## 1. 模板方法
+### 1. 模板方法
 
 - 一连串操作的顺序由“模板方法”维护，多个实现可能内容并不相同，那些真正实现的方法称为“基础方法”
 - 模板方法，可以使不变的逻辑维护在父类中，具体实现维护在子类中，他们的方法调用逻辑相同
 - 实现了定义与实现的解耦，很好的体现了“开放-封闭”原则，充分利用了面向对象的“多态性”
 
-## 2. BaseExecutor
+### 2. BaseExecutor
 
 - 维护一级缓存的实现/事务的实现
 - 给出doUpdate、doQuery、doQueryCursor、doFlushStatements四个抽象方法给子类实现
 - 本地缓存使用PerpetualCache实现，使用的本地HashMap
 - 延迟加载一级缓存使用ConcurrentLinkedQueue 实现
 
-### (1)一级缓存
+#### (1)一级缓存
 
 - 会话级别的缓存，能够针对短时间内重复查询的SQL能够起到缓存的作用，直接获取缓存数据，而不请求数据库。从而减小数据库压力
 - 一级缓存生命周期与session一致，因而session关闭一级缓存就会被清除
@@ -210,7 +210,7 @@ tags:
 
 - 以上发现flushCache 参数，LocalCacheScope配置 都可以影响是否删除缓存，除此以外，在insert update delete 对应的doUpdate之前都需要清除缓存
 
-### （2）事务操作
+#### （2）事务操作
 
 - commit & rollback
 
@@ -251,7 +251,7 @@ tags:
   }
 ```
 
-## 3. SimpleExecutor
+### 3. SimpleExecutor
 
 - 主要实现4个方法：doQuery doQueryCursor doFlushStatements doUpdate
 - 都是依靠Configuration  获取Connection 获取PrepareStatement  生成StatementHandler 最终依靠handler来实现以上4个方法
@@ -271,7 +271,7 @@ tags:
   }
 ```
 
-## 4.ReuseExecutor
+### 4.ReuseExecutor
 
 - private final Map<String, Statement> statementMap = new HashMap<>();
 - 依靠Map实现Statement的重用
@@ -291,7 +291,7 @@ tags:
 
 ```
 
-## 5.BatchExecutor
+### 5.BatchExecutor
 
 - 对于频繁单条SQL发往数据库，使得数据库负载过高的情况，客户端通常会将批量的SQL积累后，在适当的时机，发往数据库同时执行（有上限），以减轻数据库与网络的压力
 
@@ -391,11 +391,11 @@ tags:
   }
 ```
 
-## 6. CachingExecutor
+### 6. CachingExecutor
 
 - 不同于上面的模板方法，CachingExecutor是采用了装饰的方法，为mybatis提供二级缓存
 
-### 什么是二级缓存？
+#### 什么是二级缓存？
 
 1. mybatis-config中 cahceEnabled是开始二级缓存的总开关
 

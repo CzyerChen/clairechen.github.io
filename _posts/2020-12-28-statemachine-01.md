@@ -11,7 +11,7 @@ tags:
     - statemachine
 ---
 
-# 有限状态机 State Machine 
+## 有限状态机 State Machine 
 
 ## 一、简单程序带你入门
 

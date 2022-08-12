@@ -13,11 +13,11 @@ tags:
     - OGNL
 ---
 
-# SqlSource/SqlNode
+## SqlSource/SqlNode
 
-## 一、SqlSource
+### 一、SqlSource
 
-### 1.组合模式
+#### 1.组合模式
 
 - 通过组合的模式，用户可以像调用简单组件那样调用复杂组件，并且不需要知道复杂组件内部的执行逻辑
 - 优点：操作简单，屏蔽复杂性，符合“开放-封闭”原则
@@ -33,14 +33,14 @@ tags:
 调用者 --- Client
 ```
 
-### 2.OGNL 表达式的使用
+#### 2.OGNL 表达式的使用
 
 - 表达式
 - root 对象
 - OgnlContext 上下文对象
 - root对象和数组的对象如何访问
 
-### 3.Dynamic Context
+#### 3.Dynamic Context
 
 - 主要负责记录解析动态SQL之后的SQL语句片段，是记录结果的容器
 
@@ -85,39 +85,39 @@ tags:
 
 - 最为常用的是appendSql  和 getSql
 
-## 二、SqlNode
+### 二、SqlNode
 
-### 1.SqlNode: TextSqlNode /StaticTextSqlNode / MixedSqlNode / IfSqlNode
+#### 1.SqlNode: TextSqlNode /StaticTextSqlNode / MixedSqlNode / IfSqlNode
 
-### 2.StaticTextSqlNode
+#### 2.StaticTextSqlNode
 
 - 非动态SQL 
 
-### 3.MixedSqlNode
+#### 3.MixedSqlNode
 
 - List SqlNode 会循环解析内部所有SqlNode
 
-### 4.TextSqlNode
+#### 4.TextSqlNode
 
 - 用于解析${}
 
-### 5.IfSqlNode
+#### 5.IfSqlNode
 
 - test 的 apply方法，用于判断是否执行IF 片段
 
-### 6.TrimSqlNode
+#### 6.TrimSqlNode
 
 - 用于添加或删除前缀或后缀
 
-### 7.WhereSqlNode
+#### 7.WhereSqlNode
 
 - 如果以AND OR开头，就将其删除，替换为where
 
-### 8.SetSqlNode
+#### 8.SetSqlNode
 
 - 如果以“，”结尾，就将其删除，在开头添加SET
 
-### 9.ForeachSqlNode
+#### 9.ForeachSqlNode
 
 - 内部类 PrefixedContext
 
@@ -144,15 +144,15 @@ tags:
  }
 ```
 
-### 10.ChooseSqlNode
+#### 10.ChooseSqlNode
 
 - choose when otherwise --> when 替换为IfSqlNode  otherwise 替换为MixedSqlNode
 
-### 11.VarDeclSqlNode
+#### 11.VarDeclSqlNode
 
 - 动态SQL中的<bind>节点，可以从OGNL表达式中创建一个变量并将其记录到上下文中
 
-### 12.SqlSourceBuilder
+#### 12.SqlSourceBuilder
 
 - 进行SQL #{}占位符替换
 

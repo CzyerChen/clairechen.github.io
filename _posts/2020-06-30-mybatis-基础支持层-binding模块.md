@@ -10,12 +10,13 @@ tags:
     - Java
     - Mybatis
     - Binding
-    - 代理/工厂
+    - 代理模式
+    - 工厂方法模式
 ---
 
-# mybatis基础支持层-Binding模块
+## mybatis基础支持层-Binding模块
 
-## 一、MapperRegistry
+### 一、MapperRegistry
 
 - Mapper的注册中心，主要用于addMapper和getMapper,并对已经加载的Mapper进行缓存
 - addMapper
@@ -65,7 +66,7 @@ tags:
   }
 ```
 
-## 二、MapperProxyFactory
+### 二、MapperProxyFactory
 
 - Mapper代理工厂，主要通newInstance 获取MapperProxy对象
 - 对每一个Mapper类，也会缓存其包含的方法及其调用的映射
@@ -90,7 +91,7 @@ tags:
   }
 ```
 
-## 三、 MapperProxy
+### 三、 MapperProxy
 
 - 属性
 
@@ -229,11 +230,11 @@ static {
   }
 ```
 
-## 四、MapperMethod
+### 四、MapperMethod
 
 - 内含两个属性，同时也是内部类:SqlCommand(记录SQL详情)、MethodSignature（记录方法的参数、参数值、返回值等）
 
-### 1.SqlCommand
+#### 1.SqlCommand
 
 - 记录指令 :SQL语句名称 类型 与type字段
 
@@ -296,11 +297,11 @@ static {
   } 
 ```
 
-### 2.MethodSignature
+#### 2.MethodSignature
 
 > 内含方法的一些详细信息,例如返回值\参数等名称\值\类型的记录
 
-#### paramNameResolver
+##### paramNameResolver
 
 - 主要负责记录参数的名称与值,初始化的时候能够解析参数的index和参数名的映射关系,内部通过一个SortedMap<Integer, String> names,记录参数名的顺序
 
@@ -386,7 +387,7 @@ public Object getNamedParams(Object[] args) {
 
 ```
 
-#### MethodSignature
+##### MethodSignature
 
 - 所含参数较多，主要描述返回值类型，以及参数列表解析的对象
 
@@ -441,7 +442,7 @@ public Object getNamedParams(Object[] args) {
 - 通过getUniqueParamIndex 查看参数列表中是否有与传入的paramType一致或其子类的参数，来判断是否含有paramType
 - 通过getMapKey，搜索MapKey的注解的值
 
-### 3.executeXXX核心方法
+#### 3.executeXXX核心方法
 
 - 类型根据返回值的需求分为：executeForMany（sqlSession.selectList），executeForMap(sqlSession.selectMap)，executeForCursor(sqlSession.selectCursor),sqlSession.selectOne等，下面介绍一下最为常用的executeForMany，executeForMap
 

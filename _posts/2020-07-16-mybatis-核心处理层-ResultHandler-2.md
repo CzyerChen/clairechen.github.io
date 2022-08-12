@@ -10,13 +10,11 @@ tags:
     - Java
     - Mybatis
     - 结果集映射
-    - 自动映射
-    - 简单映射
 ---
 
-# ResultSetHandler 参数映射核心逻辑 -2
+## ResultSetHandler 参数映射核心逻辑 -2
 
-## 一、简单映射
+### 一、简单映射
 
 ```java
   private void handleResultSet(ResultSetWrapper rsw, ResultMap resultMap, List<Object> multipleResults, ResultMapping parentMapping) throws SQLException {
@@ -44,7 +42,7 @@ tags:
   }
 ```
 
-### 1.无论是多结果集、未指定resulthandler 或 指定resultHandler 都会调用handleRowValues 作为入口
+#### 1.无论是多结果集、未指定resulthandler 或 指定resultHandler 都会调用handleRowValues 作为入口
 
 ```java
  public void handleRowValues(ResultSetWrapper rsw, ResultMap resultMap, ResultHandler<?> resultHandler, RowBounds rowBounds, ResultMapping parentMapping) throws SQLException {
@@ -61,7 +59,7 @@ tags:
 
 ```
 
-### 2.handleRowValuesForSimpleResultMap 处理简单映射
+#### 2.handleRowValuesForSimpleResultMap 处理简单映射
 
 ```java
 private void handleRowValuesForSimpleResultMap(ResultSetWrapper rsw, ResultMap resultMap, ResultHandler<?> resultHandler, RowBounds rowBounds, ResultMapping parentMapping)

@@ -9,10 +9,9 @@ catalog: true
 tags:
     - 软件版本号定义
     - 语义化版本控制规范2.0.0
-    - GNU/Windows/.NET Framework
 ---
 
-# 如何设置软件版本号
+## 如何设置软件版本号
 
 ## 一、版本迭代的意义
 

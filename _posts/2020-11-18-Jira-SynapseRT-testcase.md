@@ -12,7 +12,7 @@ tags:
     - 测试用例
 ---
 
-# Jira SynapseRT For Test Case
+## Jira SynapseRT For Test Case
 
 - [官方基础知识](https://doc.goldfingerholdings.com/synapsert/latest/zh_cn/synapsert-ver-9-x)
 

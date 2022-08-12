@@ -9,12 +9,11 @@ catalog: true
 tags:
     - Java
     - Mybatis
-    - 主键生成
 ---
 
-# ResultHandler 参数映射核心逻辑-5
+## ResultHandler 参数映射核心逻辑-5
 
-## 一、KeyGenerator
+### 一、KeyGenerator
 
 - 处理insert语句的时候，并不会自动返回生成的主键内容，而只会返回插入记录的条数。如果插入记录是自增主键希望返回实际内容的时候，可以使用KeyGenerator接口
 
@@ -36,7 +35,7 @@ public interface KeyGenerator {
 - Jdbc3KeyGenerator： 用于取回数据库生成的自增id，对应于mybatis-config.xml中的全局配置，SQL节点的useGeneratedKeys 属性
 - processBefore无实现，processAfter实现自增主键id的获取
 
-### 1.Jdbc3KeyGenerator
+#### 1.Jdbc3KeyGenerator
 
 - 用于取回数据库生成的自增id，对应mybatis-config.xml配置文件中的useGeneratedKeys 全局配置，以及映射映射配置文件中SQL节点的useGeneratedKeys属性
 - processBefore方法为空，processAfter方法为实现主体,直接调用processBatch批量处理结果集
@@ -82,7 +81,7 @@ public void processBatch(MappedStatement ms, Statement stmt, Object parameter) {
 
 ```
 
-### 2.SelectKeyGenerator
+#### 2.SelectKeyGenerator
 
 - 对于不支持主键自动自增的，可以使用<selectKey>标签生成主键，需要设置主键生成的SQL，需要表明SQL执行前执行还是执行后执行，都是调用processGeneratedKeys方法实现
 

@@ -11,7 +11,7 @@ tags:
     - statemachine
 ---
 
-# 有限状态机 State Machine 
+## 有限状态机 State Machine 
 
 ## 二、状态机概念
 

@@ -9,12 +9,13 @@ catalog: true
 tags:
     - Java
     - Mybatis
-    - 装饰器/策略 
+    - 装饰器模式
+    - 策略模式 
 ---
 
-# ResultHandler 参数映射核心逻辑-5
+## ResultHandler 参数映射核心逻辑-5
 
-## 一、StatementHandler
+### 一、StatementHandler
 
 ```text
                     StatementHandler
@@ -28,7 +29,7 @@ tags:
  CallableStatementHandler
 ```
 
-### 1. RoutingStatementHandler
+#### 1. RoutingStatementHandler
 
 - 此处的RoutingStatementHandler 并没有特殊的实现，只是根据StatementType字段，创建不同的StatementHandler，主要功能实现只要在于SimpleStatementHandler、PreparedStatementHandler、CallableStatementHandler 三个对象
 
@@ -52,7 +53,7 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
   }
 ```
 
-### 2. BaseStatementHandler
+#### 2. BaseStatementHandler
 
 - 主要实现prepare方法
 
@@ -79,7 +80,7 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
   }
 ```
 
-### 3.ParameterHandler
+#### 3.ParameterHandler
 
 - 实现类：DefaultParameterHandler
 - 主要针对SQL中占位符?，替换实际参数内容
@@ -125,7 +126,7 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
   }
 ```
 
-### 4.SimpleStatementHandler
+#### 4.SimpleStatementHandler
 
 - 继承自BaseStatementHandler，主要用于实现query / update等方法
 
@@ -173,7 +174,7 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
 
 ```
 
-### 5. PrepareStatementHandler
+#### 5. PrepareStatementHandler
 
 ```java
 //初始化略有不同
@@ -200,7 +201,7 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
   }
 ```
 
-### 6.CallableStatementHandler
+#### 6.CallableStatementHandler
 
 - 内部使用CallableStatement，调用指定存储过程， query、update方法与上一致
 

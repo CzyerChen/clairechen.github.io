@@ -8,13 +8,12 @@ header-img: img/post-bg-universe.jpg
 catalog: true
 tags:
     - Java
-    - RESTful API
-    - API 设计
+    - RESTful
 ---
 
-# RESTful API 规范
+## RESTful API 规范
 
-## 一、什么是RESTful
+### 一、什么是RESTful
 
 - REST 取自Roy Thomas Fielding 2000年的博士论文
 - Roy Thomas Fielding 是HTTP1.0/1.1主要设计者，Apache服务器软件的作者之一，Apache基金会第一任主席
@@ -29,32 +28,32 @@ level 2 Http verbs
 level 3 Hybermedia Controls
 ```
 
-### 1.资源 Resources
+#### 1.资源 Resources
 
 - 网络上的资源：文本、图片、服务等
 
-### 2.表现层 Representation
+#### 2.表现层 Representation
 
 - "资源"具体展现出来的形式，叫做“表现层”
 
-### 3.状态转换 State Transfer
+#### 3.状态转换 State Transfer
 
 - 一个请求，肯定会涉及到数据和状态的变化
 - HTTP通信是无状态的，那么所有状态就保留在服务端
 - 客户端如果想操作服务端，就必须通过渠道，让服务端进行“状态转换”
 - 四个动词：GET /POST /PUT /DELETE ,能够让服务端进行"状态转换"
 
-### 4.什么是RESTful架构
+#### 4.什么是RESTful架构
 
 - 每一个URI代表一种资源
 - 客户端与服务端质检，传递这种资源的某种表现层
 - 客户端通过四个HTTP动词，对服务端资源进行操作，实现“表现层状态转化”
 
-### 5.误区
+#### 5.误区
 
 - URI包含动词，如果及时有表达不了的动词，也只能用名词来替代，描述一种服务，而不是使用动词
 
-### 其他总结
+#### 其他总结
 
 ```text
 REST四个基本原则：
@@ -68,19 +67,19 @@ REST四个基本原则：
 3.异构环境下，任何资源的访问和使用方式都统一；
 ```
 
-## 二、RESTful API指南
+### 二、RESTful API指南
 
-### 1.使用HTTPs协议
+#### 1.使用HTTPs协议
 
-### 2.将API部署在专用域名之下，使用统一的url前缀，例如/api
+#### 2.将API部署在专用域名之下，使用统一的url前缀，例如/api
 
-### 3.将API版本放入URL，例如/api/v1
+#### 3.将API版本放入URL，例如/api/v1
 
-### 4.EndPoint 路径
+#### 4.EndPoint 路径
 
 标识API具体网址，网址中不能有动词，只有名词，并且名词最好能够与数据库表的名称对应，API中名词应该是复数
 
-### 5.HTTP动词
+#### 5.HTTP动词
 
 ```text
 GET: select 操作，从服务器获取资源
@@ -93,11 +92,11 @@ HEAD：获取资源的元信息
 OPTIONS：获取信息
 ```
 
-### 6.过滤信息
+#### 6.过滤信息
 
 参数的设计允许冗余，允许API路径和URL参数偶尔重复
 
-### 7.状态码
+#### 7.状态码
 
 ```text
 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
@@ -116,11 +115,11 @@ OPTIONS：获取信息
 
 [全量HTTP状态码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
 
-### 8.错误处理
+#### 8.错误处理
 
 - 如果是4XX的错误，应该向用户返回出错信息
 
-### 9.返回结果
+#### 9.返回结果
 
 ```text
 GET /collection：返回资源对象的列表（数组）
@@ -131,18 +130,18 @@ PATCH /collection/resource：返回完整的资源对象
 DELETE /collection/resource：返回一个空文档
 ```
 
-### 10.Hypermedia API
+#### 10.Hypermedia API
 
 返回结果中，提供连接，连向其他的API方法
 
-### 11.返回数据格式
+#### 11.返回数据格式
 
 最好使用JSON/XML,增加可读性
 
 
-## 三、RESTFUL 最佳实践
+### 三、RESTFUL 最佳实践
 
-### URL设计
+#### URL设计
 
 1. 动词+宾语： GET /api/files ; POST /api/files ; DELETE /api/files/{id}
 2. 宾语是名词复数形式 
@@ -183,7 +182,7 @@ DELETE: 204 No Content
 5. 服务器响应JSON,而不是纯文本
 6. 发生错误时，不要返回 200 状态码，给出错误信息
 
-## 四、总结
+### 四、总结
 
 - 通常在实操当中我们需要注意
 

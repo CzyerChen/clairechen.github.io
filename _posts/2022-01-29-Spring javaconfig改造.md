@@ -17,6 +17,7 @@ tags:
 >今天我们这边就是面临一个从Spring4到Spring5，从配置文件到注解注入的改造。
 
 > 依赖版本的变化主要有：
+> 
 > 1. Spring 4.3.18.RELEASE -> 5.3.6
 > 2. Spring Data 1.11.14.RELEASE  ->	2.5.1
 > 3. Hibernate	4.2.4.Final -> 5.4.29.Final
@@ -25,6 +26,7 @@ tags:
 
 
 > 遇到的问题大约有：
+> 
 > 1. 如何去除web.xml
 > 2. 如何去除applicationContext.xml
 > 3. 如何去除springmvc.xml
@@ -33,6 +35,7 @@ tags:
 
 -----------
 **目录**
+
 - [一、准备内容](#一准备内容)
   - [一个正常能跑的springmvc项目](#一个正常能跑的springmvc项目)
   - [applicationContext.xml样例](#applicationcontextxml样例)
@@ -48,6 +51,7 @@ tags:
 - [Refer](#refer)
 
 ------------
+
 ## 一、准备内容
 
 ### 一个正常能跑的springmvc项目

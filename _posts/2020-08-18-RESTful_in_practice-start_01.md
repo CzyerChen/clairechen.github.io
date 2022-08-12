@@ -12,13 +12,13 @@ tags:
 ---
 
 
-# REST in Practice
+## REST in Practice
 
 REST发展进程
 
 ![avatar](../img/REST历史.png)
 
-## 一、互联网应用架构约束
+### 一、互联网应用架构约束
 
 - 客户-服务端
 - 无状态
@@ -27,7 +27,7 @@ REST发展进程
 - 分层系统
 - 按需代码
 
-## 二、时间线
+### 二、时间线
 
 1. 2000年,Fielding发表博士论文，提出REST的概念。当时的市场还充斥这DO这种架构风格，一时没有很大反响(REST-- Representation State Transfer 表现层状态转换)
 2. 2005年，Web2.0崛起，当时EJB/DCOM/SOAP等架构的问题慢慢显现，由于不满足互联网应用架构的部分约束，因而很难融入Web之中，因而将目光转向REST，并发起了一场运动

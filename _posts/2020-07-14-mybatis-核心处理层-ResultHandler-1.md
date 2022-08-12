@@ -9,12 +9,11 @@ catalog: true
 tags:
     - Java
     - Mybatis
-    - 结果集映射
 ---
 
-# ResultSetHandler 参数映射核心逻辑 -1
+## ResultSetHandler 参数映射核心逻辑 -1
 
-## 一、ResultSetHandler
+### 一、ResultSetHandler
 
 ```java
 public interface ResultSetHandler {
@@ -31,7 +30,7 @@ public interface ResultSetHandler {
 }
 ```
 
-## 二、实现类 DefaultResultSetHandler
+### 二、实现类 DefaultResultSetHandler
 
 - 包含的属性：
 
@@ -72,7 +71,7 @@ public interface ResultSetHandler {
   private boolean useConstructorMappings;
 ```
 
-### 1.处理结果 handleResultSets
+#### 1.处理结果 handleResultSets
 
 ```java
 public List<Object> handleResultSets(Statement stmt) throws SQLException {
@@ -164,7 +163,7 @@ public List<Object> handleResultSets(Statement stmt) throws SQLException {
   }
 ```
 
-### ResultSetWrapper 封装ResultSet的一些属性
+#### ResultSetWrapper 封装ResultSet的一些属性
 
 ```java
 //resultSet对象

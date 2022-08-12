@@ -14,18 +14,18 @@ tags:
     - 动态代理
 ---
 
-# ResultSetHandler 参数映射核心逻辑 -4
+## ResultSetHandler 参数映射核心逻辑 -4
 
-## 一、嵌套查询&延迟加载
+### 一、嵌套查询&延迟加载
 
 - 延迟加载的含义：对象会在真正时候的时候才会被加载到内存，并且调用。初始化时只绑定对应属性的代理对象，真正使用时，调用代理对象最终实现延迟加载属性
 
-### 1.CGLIB 动态代理
+#### 1.CGLIB 动态代理
 
 - 在java中提到比较多的就是动态代理就包括：JDK动态代理、CGLIB动态代理
 - 两者的区别就在，JDK动态代理依靠实现接口实现方法的代理，CGLIB利用字节码技术无需实现接口，继承的方式也能够实现类方法的代理
 
-#### jdk动态代理
+##### jdk动态代理
 
 ```java
 public interface MethodInterface {
@@ -73,7 +73,7 @@ public class DynamicInvokeTest {
 }
 ```
 
-#### cglib动态代理
+##### cglib动态代理
 
 ```java
 public abstract class AbstractMethod {
@@ -123,7 +123,7 @@ public class DynamicInvokeTest {
 - 因而Spring都是默认JDK动态代理，少许不实现接口的代理类使用CGLIB动态代理实现
 - JDK动态代理，代理类实现InvokeHandler,cglib动态代理，代理类实现MethodInterceptor
 
-### 2.javassist 代理
+#### 2.javassist 代理
 
 - javassist是一个开源的生成java字节码的类库，能够简单、快速使用API动态生成类
 - 与cglib不同的是，代理类实现的是MethodHandler接口
@@ -196,13 +196,13 @@ public class JavassitPerson {
 
 - mybatis中使用动态代理就用到了Cglib和Javassit的方式
 
-### 3.ResultLoader & ResultLoaderMap & proxyFactory
+#### 3.ResultLoader & ResultLoaderMap & proxyFactory
 
 - ResultLoader 一次延迟加载所需的全部字段
 - ResultLoaderMap 主要继续需要延迟加载的内容，一起加载
 - PorxyFactory代理工厂，就包含CglibProxyFactory、JavassitProxyFactory两种
 
-#### (1)ResultLoader
+##### (1)ResultLoader
 
 - 属性
 
@@ -301,7 +301,7 @@ public class JavassitPerson {
   }
 ```
 
-#### (2)ResultLoaderMap 
+##### (2)ResultLoaderMap 
 
 - 属性
 
@@ -431,7 +431,7 @@ public class JavassitPerson {
     }
 ```
 
-#### (3)ProxyFactory
+##### (3)ProxyFactory
 
 - ProxyFactory的两个子类，一个使用cglib 一个使用Javassit , 挑选比较熟悉的CGLIB了解一下执行过程
 - CGLIB动态代理上面的流程也了解到了，会有createProxy的方法创建代理，其次就是实现MethodInterceptor的方法调用intercept方法
@@ -560,7 +560,7 @@ public class JavassitPerson {
 
 ```
 
-#### (4)如何通过以上的动态代理实现嵌套结果的获取
+##### (4)如何通过以上的动态代理实现嵌套结果的获取
 
 ```java
 private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObject, ResultMapping propertyMapping, ResultLoaderMap lazyLoader, String columnPrefix)
@@ -623,7 +623,7 @@ private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObj
   }
 ```
 
-#### (5)多结果集映射
+##### (5)多结果集映射
 
 - applyPropertyMappings 中的多结果集场景
 
@@ -769,7 +769,7 @@ private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObj
   }
 ```
 
-#### (6)游标
+##### (6)游标
 
 - Cursor 接口 实现类DefaultCursor,继承了Iterable 接口
 - DefaultResultSetHandler.handleCursorResultSets
@@ -895,7 +895,7 @@ private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObj
   }
 ```
 
-#### (7)输出类型的参数
+##### (7)输出类型的参数
 
 - DefaultResultSetHandler.handleOutputParameters
 

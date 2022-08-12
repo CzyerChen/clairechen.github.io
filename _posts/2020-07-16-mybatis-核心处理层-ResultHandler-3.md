@@ -13,13 +13,13 @@ tags:
     - 嵌套映射
 ---
 
-# ResultSetHandler 参数映射核心逻辑 -3
+## ResultSetHandler 参数映射核心逻辑 -3
 
-## 一、嵌套映射
+### 一、嵌套映射
 
 - 以上处理了普通映射类型，还有另一个处理分支是处理嵌套映射类型的
 
-### 1.handleRowValuesForNestedResultMap 里面很多方法是与上面处理简单类型是相同的，不再介绍
+#### 1.handleRowValuesForNestedResultMap 里面很多方法是与上面处理简单类型是相同的，不再介绍
 
 ```java
  private void handleRowValuesForNestedResultMap(ResultSetWrapper rsw, ResultMap resultMap, ResultHandler<?> resultHandler, RowBounds rowBounds, ResultMapping parentMapping) throws SQLException {
@@ -97,7 +97,7 @@ tags:
   }
 ```
 
-### 2.createRowKeyForMappedProperties 对明确的列创建rowKey
+#### 2.createRowKeyForMappedProperties 对明确的列创建rowKey
 
 ```java
 private void createRowKeyForMappedProperties(ResultMap resultMap, ResultSetWrapper rsw, CacheKey cacheKey, List<ResultMapping> resultMappings, String columnPrefix) throws SQLException {
@@ -124,7 +124,7 @@ private void createRowKeyForMappedProperties(ResultMap resultMap, ResultSetWrapp
   }
 ```
 
-### 3.getRowValue 获取一行的嵌套的内容，主要涉及嵌套处理逻辑
+#### 3.getRowValue 获取一行的嵌套的内容，主要涉及嵌套处理逻辑
 
 ```java
 //对一行数据进行映射
@@ -168,7 +168,7 @@ private void createRowKeyForMappedProperties(ResultMap resultMap, ResultSetWrapp
 
 ```
 
-### 4.applyNestedResultMappings 处理嵌套的resultMapping
+#### 4.applyNestedResultMappings 处理嵌套的resultMapping
 
 ```java
 private boolean applyNestedResultMappings(ResultSetWrapper rsw, ResultMap resultMap, MetaObject metaObject, String parentPrefix, CacheKey parentRowKey, boolean newObject) {
@@ -223,7 +223,7 @@ private boolean applyNestedResultMappings(ResultSetWrapper rsw, ResultMap result
   }
 ```
 
-### 5.linkObjects 处理循环引用 （A 内部属性 associate B ，B 内部属性 associate A）
+#### 5.linkObjects 处理循环引用 （A 内部属性 associate B ，B 内部属性 associate A）
 
 ```java
  private void linkObjects(MetaObject metaObject, ResultMapping resultMapping, Object rowValue) {
@@ -240,7 +240,7 @@ private boolean applyNestedResultMappings(ResultSetWrapper rsw, ResultMap result
   }
 ```
 
-### 6.instantiateCollectionPropertyIfAppropriate 如果集合属性没有初始化则初始化，已经初始化则返回值
+#### 6.instantiateCollectionPropertyIfAppropriate 如果集合属性没有初始化则初始化，已经初始化则返回值
 
 ```java
 private Object instantiateCollectionPropertyIfAppropriate(ResultMapping resultMapping, MetaObject metaObject) {
@@ -271,7 +271,7 @@ private Object instantiateCollectionPropertyIfAppropriate(ResultMapping resultMa
   }
 ```
 
-### 7.combineKeys 相同cachekey 如果parent不同，需要生成不同的key
+#### 7.combineKeys 相同cachekey 如果parent不同，需要生成不同的key
 
 ```java
   private CacheKey combineKeys(CacheKey rowKey, CacheKey parentRowKey) {
