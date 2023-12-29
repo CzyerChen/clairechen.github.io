@@ -13,7 +13,7 @@ tags:
 
 - [获取源码并加载环境](#获取源码并加载环境)
 - [spring-cloud-kubernetes下的示例](#spring-cloud-kubernetes下的示例)
-- [mac minikube 本地构建执行SpringCloud-Kubernetes-Example](#mac-minikube-本地构建执行springcloud-kubernetes-example)
+- [Mac minikube 本地构建执行SpringCloud-Kubernetes-Example](#mac-minikube-本地构建执行springcloud-kubernetes-example)
 
 背景：2019年开始 SpringCloud 开始向 K8S容器化流程演变，逐步诞生了【Spring-Cloud-Kubernetes】
 
@@ -69,7 +69,7 @@ org/kubernetes-leader-election-example
 eval $(minikube docker-env)
 ```
 
-## mac minikube 本地构建执行SpringCloud-Kubernetes-Example
+## Mac minikube 本地构建执行SpringCloud-Kubernetes-Example
 
 mac 安装 minikube此处不描述。本文主要参照官方流程，依据源码构建实践示例代码。
 
