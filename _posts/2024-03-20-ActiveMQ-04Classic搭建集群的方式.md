@@ -2,7 +2,7 @@
 layout:     post
 title:      ActiveMQ-04如何搭建ActiveMQ集群
 subtitle:   ActiveMQ Classic
-date:       2024-03-18
+date:       2024-03-25
 author:     Claire
 header-img: img/post-bg-desk.jpg
 catalog: true

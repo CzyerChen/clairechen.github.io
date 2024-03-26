@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      ClickHouse06-ClickHouse中Kafka表引擎
+title:      ClickHouse10-ClickHouse中Kafka表引擎
 subtitle:   ClickHouse
 date:       2024-03-18
 author:     Claire
