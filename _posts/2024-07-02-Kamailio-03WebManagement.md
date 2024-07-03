@@ -22,6 +22,21 @@ siremis 是针对于 Kamailio 的web管理接口，使用PHP书写，更新至20
 - php7.0
 
 如有疑问请参看[官方指南](https://kb.asipto.com/siremis:install53x:main)
+以下开始介绍操作步骤
+
+- [安装apache2.4 web服务器](#安装apache24-web服务器)
+- [安装php7.0](#安装php70)
+- [下载源码并安装](#下载源码并安装)
+- [配置Siremis访问路径](#配置siremis访问路径)
+- [初始化Siremis的配置文件](#初始化siremis的配置文件)
+- [使用MySQL作为存储](#使用mysql作为存储)
+- [启动并验证](#启动并验证)
+  - [System Check](#system-check)
+  - [Database Configuration](#database-configuration)
+  - [Application Configuration](#application-configuration)
+  - [Finish](#finish)
+  - [登录平台](#登录平台)
+
 
 ## 安装apache2.4 web服务器
 
