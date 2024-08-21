@@ -3,7 +3,7 @@
 
 ### Spring
 
-- [Spring javaconfig改造](_posts/2022-01-29-Spring javaconfig改造.md)
+- [Spring javaconfig改造](_posts/2022-01-29-Spring-javaconfig改造.md)
 - [Spring技术内幕-01](_posts/2020-12-27-Spring技术内幕-01.md)
 
 ### SpringBoot
