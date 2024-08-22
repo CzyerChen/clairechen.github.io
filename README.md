@@ -309,6 +309,6 @@
 - [中台实践企业级通用化黑名单平台2](_posts/2022-02-08-%D6%D0%CC%A8%CA%B5%BC%F9%C6%F3%D2%B5%BC%B6%CD%A8%D3%C3%BB%AF%BA%DA%C3%FB%B5%A5%C6%BD%CC%A82.md)
 - [云原生MeetUpInSuZhou](_posts/2023-12-23-%D4%C6%D4%AD%C9%FAMeetUpInSuZhou.md)
 - [Design&Implementation-of-Architecture](_posts/2020-12-27-Design%26Implementation-of-Architecture.md)
-- [领域设计DDD-01.md](_posts/2020-11-21-%C1%EC%D3%F2%C9%E8%BC%C6DDD-01)
+- [领域设计DDD-01](_posts/2020-11-21-%C1%EC%D3%F2%C9%E8%BC%C6DDD-01)
 
 
