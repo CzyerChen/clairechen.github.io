@@ -1,3 +1,6 @@
+<div align=center>
+<img src="https://raw.githubusercontent.com/CzyerChen/clairechen.github.io/master/img/map.png" width="500" height="550">
+</div>
 
 ## Spring 全家桶
 
