@@ -416,7 +416,7 @@ Exit codes:
 ./sipp -sf example-server.xml -i host -p port  --max_socket 100000 -l 500000
 ```
 
-![img](../img/blog/Kamailio-SIPp-UAS.png)
+![img](https://raw.githubusercontent.com/CzyerChen/clairechen.github.io/master/img/blog/Kamailio-SIPp-UAS.png)
 
 服务端脚本一般如何设计：
 
@@ -494,7 +494,7 @@ Exit codes:
 ./sipp proxyhost:port -sf example-client.xml  -r batchsize  -d 10000 -s caller -m totalcount
 ```
 
-![img](../img/blog/Kamailio-SIPp-UAC.png)
+![img](https://raw.githubusercontent.com/CzyerChen/clairechen.github.io/master/img/blog/Kamailio-SIPp-UAC.png)
 
 对于客户端的脚本，通常要与服务端对应，也可以模拟一些异常情况，随机回复到异常的情况，比如呼叫后取消、呼叫后保持、呼叫后挂起一段时间等
 

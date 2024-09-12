@@ -34,7 +34,7 @@ A: 就是需要负载均衡剔除异常服务节点，转发至可用节点
 
 既然看上去功能强大且十分诱人的功能，要如何才能使用呢？
 
-![img](../img/blog/Kamailio-Dispatcher.png)
+![img](https://raw.githubusercontent.com/CzyerChen/clairechen.github.io/master/img/blog/Kamailio-Dispatcher.png)
 
 ## 如何使用？
 
